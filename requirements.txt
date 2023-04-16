@@ -1,0 +1,8 @@
+Django==4.1.7
+psycopg2==2.9.5
+django-htmx==1.14.0
+django_debug_toolbar==3.8.1
+django_extensions==3.2.1
+coverage==7.2.2
+python-dateutil==2.8.2
+crispy-bulma==0.9.0

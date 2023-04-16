@@ -1,0 +1,68 @@
+{% extends "ledger/_base.html" %}
+{% block main %}
+    <section class="section">
+        <div class="columns is-mobile">
+            <div class="column is-one-third is-offset-one-third">
+                {% if form.errors %}
+                    <article class="message is-danger">
+                        <div class="message-body">Your username and password didn't match. Please try again</div>
+                    </article>
+                {% endif %}
+                {% if next %}
+                    {% if user.is_authenticated %}
+                        <article class="message is-danger">
+                            <div class="message-body">
+                                Your account doesn't have access to this page. To proceed,
+                                please login with an account that has access.
+                            </div>
+                        </article>
+                    {% else %}
+                        <article class="message is-info">
+                            <div class="message-body">Please login to see this page.</div>
+                        </article>
+                    {% endif %}
+                {% endif %}
+                <div class="card">
+                    <header class="card-header has-background-primary">
+                        <p class="card-header-title has-text-centered">Login</p>
+                    </header>
+                    <div class="card-content">
+                        <form method="post" action="{% url 'login' %}">
+                            {% csrf_token %}
+                            <div class="field">
+                                <label for="id_username" class="label">Username</label>
+                                <div class="control">
+                                    <input type="text" name="username" required id="id_username" class="input" />
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="id_password" class="label">Password</label>
+                                <div class="control">
+                                    <input type="password"
+                                           name="password"
+                                           required
+                                           id="id_password"
+                                           class="input"/>
+                                </div>
+                            </div>
+                            <div class="field is-grouped">
+                                <div class="control">
+                                    <input type="submit" value="Login" class="button is-primary" />
+                                </div>
+                                <div class="control">
+                                    <input type="hidden" name="next" value="{{ next }}" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer has-background-white-ter">
+                        {# Assumes you set up the password_reset view in your URLconf #}
+                        <p class="card-footer-item">
+                            <a href="{% url 'password_reset' %}">Lost password?</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock main %}

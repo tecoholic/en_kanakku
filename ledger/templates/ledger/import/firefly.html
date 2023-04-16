@@ -1,0 +1,29 @@
+{% extends "ledger/_layout.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1 class="title">Import Firefly III Transactions</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input class="button is-primary my-5"
+               type="submit"
+               value="Import Transactions"/>
+    </form>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Get all "file-input" elements
+        const fileInputs = Array.prototype.slice.call(document.querySelectorAll('.file-input'), 0);
+
+        // Add a onchange event on each of them
+        fileInputs.forEach(el => {
+          el.addEventListener('change', () => {
+            // Get the target from the "data-target" attribute
+            const target = el.dataset.target;
+            const $target = document.getElementById(target);
+            // Update the filename
+            $target.textContent = el.value;
+          });
+        });
+      });
+    </script>
+{% endblock content %}

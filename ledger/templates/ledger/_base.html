@@ -1,0 +1,20 @@
+{% load static %}
+{% load django_htmx %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>En Kanakku</title>
+        <link rel="stylesheet" href="{% static 'css/bulma_0.9.4.min.css' %}" />
+        <meta name="keywords" content="Personal,Finance,Accounting,Indian"/>
+        <meta name="description" content="A Personal Finance App" />
+        <script src="{% static 'js/htmx/htmx_1.8.6.min.js' %}" defer></script>
+        <script src="{% static 'js/htmx/debug.js' %}" defer></script>
+    </head>
+    <body>
+        {% block main %}
+        {% endblock main %}
+        {% django_htmx_script %}
+    </body>
+</html>
