@@ -15,3 +15,6 @@ build:
 
 shell:
 	docker-compose exec web bash
+
+requirements:
+	python -m pip install -r requirements.txt

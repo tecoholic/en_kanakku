@@ -1,13 +1,21 @@
 name: Test Coverage
-on: [push]
+on: [push, pull_request]
 jobs:
-  Django-Test-Coverage:
+  test-coverage:
     runs-on: ubuntu-latest
+    env:
+      PYTHON: '3.10'
     steps:
       - name: Checkout action
         uses: actions/checkout@v2
-      - name: Django Coverage action
-        uses: actions/python-django-coverage-gitHub-action@0.9
-        with:
-          django-app: 'ledger'
-          minimum-coverage: '95'
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+
+      - name: Install Dependencies
+        run: |
+          make requirements
+
+      - name: Run test coverage
+        run: |
+          make coverage
