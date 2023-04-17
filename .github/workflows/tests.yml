@@ -1,0 +1,13 @@
+name: Test Coverage
+on: [push]
+jobs:
+  Django-Test-Coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout action
+        uses: actions/checkout@v2
+      - name: Django Coverage action
+        uses: actions/python-django-coverage-gitHub-action@0.9
+        with:
+          django-app: 'ledger'
+          minimum-coverage: '95'
