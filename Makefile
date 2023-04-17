@@ -3,6 +3,7 @@ test:
 
 coverage:
 	coverage run --source='.' manage.py test
+	coverage report --fail-under=95
 
 cov-html: coverage
 	coverage html
