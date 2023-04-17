@@ -1,0 +1,4 @@
+date,description,amount,from_account,to_account,category,type
+2020-01-01,"First Transaction",12.50,"Account 1","Account 2",Groceries,Expense
+2020-01-02,"Second Transaction",37.15,"Account 1","Account 2",Transport,Expense
+2020-01-03,"Third Transaction",0.35,"Account 1","Account 2",Snacks,Expense
