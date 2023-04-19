@@ -1,7 +1,10 @@
 import logging
+from typing import Dict
 
 from dateutil.parser import parse
 from ledger.models import Account, Transaction, TransactionType
+
+from ledger.importer.utils import find_comma_indexes, split_string
 
 logger = logging.getLogger(__name__)
 
@@ -23,21 +26,31 @@ class HDFCDelimitedTextImporter:
     def import_transactions(self, filepath: str, update_account_balance: bool = False):
         headers = []
         row = {}
+        column_ends = []
         with open(filepath) as fp:
             for line in fp:
                 if not line.strip():
                     continue
-                row_items = [h.strip() for h in line.split(",")]
 
                 # Technically we could skip parsing this row as we already have
                 # the headers hardcoded as expected_headers. But this assignment
                 # and the assertion will help us catch any change in the bank
                 # statement's formatting
                 if not headers:
-                    headers = row_items
+                    headers = [s.strip() for s in line.split(",")]
                     assert headers == self.expected_headers
                     continue
 
+                # Set the column_ends based on the comma locations on the first transaction
+                if not column_ends:
+                    column_ends = find_comma_indexes(line)
+                    # make sure we are splitting the row text into the same number of columns
+                    # as the headers
+                    assert len(column_ends) == len(headers) - 1
+
+                row_items = [
+                    s.replace(",", "").strip() for s in split_string(line, column_ends)
+                ]
                 row = dict(zip(headers, row_items))
                 debit = float(row["Debit Amount"])
                 credit = float(row["Credit Amount"])

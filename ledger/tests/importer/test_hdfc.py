@@ -19,10 +19,10 @@ class HDFCDelimitedTextImporterTestCase(TestCase):
         importer = HDFCDelimitedTextImporter(self.account)
         importer.import_transactions(self.test_file)
 
-        self.assertEqual(Transaction.objects.count(), 6)
+        self.assertEqual(Transaction.objects.count(), 7)
         self.assertEqual(Transaction.objects.filter(source=self.account).count(), 5)
         self.assertEqual(
-            Transaction.objects.filter(destination=self.account).count(), 1
+            Transaction.objects.filter(destination=self.account).count(), 2
         )
 
     def test_importer_updates_the_account_balance_when_expected(self):
@@ -37,4 +37,4 @@ class HDFCDelimitedTextImporterTestCase(TestCase):
         importer.import_transactions(self.test_file, update_account_balance=True)
 
         # Balance is updated to the same value as the last transaction
-        self.assertEqual(self.account.balance, 379907.40)
+        self.assertEqual(self.account.balance, 209707.06)

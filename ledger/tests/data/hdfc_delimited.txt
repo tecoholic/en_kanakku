@@ -1,8 +1,9 @@
 
-  Date     ,Narration                                                                                                                ,Value Dat,Debit Amount       ,Credit Amount      ,Chq/Ref Number   ,Closing Balance
+  Date     ,Narration                                                                                                                ,Value Dat,Debit Amount       ,Credit Amount    ,Chq/Ref Number   ,Closing Balance
  01/03/23  ,SI HGA7P063010206318359 ICICI P-01/03/23                                                                                 ,01/03/23 ,       5000.00     ,          0.00     ,000000000000000        ,    191190.70  
  01/03/23  ,112809493137/CCAAIRTELIN                                                                                                 ,01/03/23 ,       1767.64     ,          0.00     ,0000230602591733       ,    189423.06  
  04/03/23  ,XHDF1029640632/BILLDKAPPLESERVICES                                                                                       ,04/03/23 ,        350.00     ,          0.00     ,0000230634782095       ,    189073.06  
  06/03/23  ,SI HGA7P137460240121661 UTI MUT-06/03/23                                                                                 ,06/03/23 ,       5000.00     ,          0.00     ,000000000000000        ,    184073.06  
- 06/03/23  ,IMPS-306513798732-WISE PAYMENTS LIMITE-YESB-XXXXXXXXXXX0173-RDA REMITTANCE CR TO KYC COMPLIANT ACCOUNTS ONLY             ,06/03/23 ,          0.00     ,     196353.34     ,0000306513798732       ,    380426.40  
+ 06/03/23  ,IMPS-306513798732-WISE PAYMENTS LIMITE-YESB-XXXXXXXXXXX0173-RDA REMITTANCE CR TO KYC COMPLIANT ACCOUNTS ONLY             ,06/03/23 ,          0.00     ,     196353.34     ,000030651379873224     ,    380426.40  
  06/03/23  ,KQTXI5MMA57KDOGRDY/PAYUBHARTIAIRTELLIMI                                                                                  ,06/03/23 ,        519.00     ,          0.00     ,0000230656761710       ,    379907.40  
+ 23/01/23  ,NEFT CR-CHAS0INBX01-GUSTO, INC.-ARUNMOZHI PERIASAMY                .-CHASH23023974797                                    ,23/01/23 ,           0.00    ,       11926.14    ,CHASH23023974797       ,    209707.06  
