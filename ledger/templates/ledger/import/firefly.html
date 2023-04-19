@@ -1,7 +1,7 @@
 {% extends "ledger/_layout.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h1 class="title">Import Firefly III Transactions</h1>
+    <h1 class="title">Import Transactions</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}

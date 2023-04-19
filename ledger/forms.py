@@ -1,6 +1,8 @@
 from django import forms
 from crispy_bulma.widgets import FileUploadInput
 
+from ledger.models import Account
+
 
 class CSVUploadForm(forms.Form):
     csv_file = forms.FileField(
@@ -14,3 +16,12 @@ class CSVUploadForm(forms.Form):
                 "Invalid file format: Only CSV files are allowed."
             )
         return csv_file
+
+
+class HDFCDelimitedTextImportForm(forms.Form):
+    file = forms.FileField(
+        label="Select HDFC Delimited Text export of your Transactions",
+        widget=FileUploadInput,
+    )
+    account = forms.ModelChoiceField(queryset=Account.objects.all())
+    update_account_balance = forms.BooleanField(required=False)
