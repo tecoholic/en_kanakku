@@ -39,3 +39,4 @@ class CatagoryAdmin(admin.ModelAdmin):
 @admin.register(models.Transaction)
 class TransactionAdmin(admin.ModelAdmin):
     list_filter = ["source", "transaction_type", "category"]
+    date_hierarchy = "date"
