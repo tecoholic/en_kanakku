@@ -1,5 +1,9 @@
 [env]
 DEBUG=true
+POSTGRES_HOST="localhost"
+POSTGRES_NAME="postgres"
+POSTGRES_USER="postgres"
+POSTGRES_PASSWORD="postgres"
 
 [tools]
 python = {version='3.10', virtualenv='venv'}
