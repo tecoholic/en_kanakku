@@ -7,3 +7,4 @@ POSTGRES_PASSWORD="postgres"
 
 [tools]
 python = {version='3.10', virtualenv='venv'}
+node = "20"

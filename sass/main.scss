@@ -1,0 +1,8 @@
+@charset "utf-8";
+
+$purple: #8A4D76;
+
+$primary: $purple;
+$menu-item-active-background-color: $primary;
+
+@import "../node_modules/bulma/bulma.sass";

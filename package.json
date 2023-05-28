@@ -1,0 +1,17 @@
+{
+  "name": "en_kanakku",
+  "version": "1.0.0",
+  "description": "Ena Kanakku is a personal expense analyser. The goal of the application is provide insights into your earning and spending patterns by analysing bank statement, credit card statements ...etc.,",
+  "main": "sass/main.scss",
+  "scripts": {
+    "css-build": "sass sass/main.scss:ledger/static/css/main.css",
+    "css-watch": "npm run css-build -- --watch",
+    "start": "npm run css-watch"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "bulma": "^0.9.4",
+    "sass": "^1.62.1"
+  }
+}

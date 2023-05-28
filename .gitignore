@@ -163,3 +163,4 @@ cython_debug/
 
 # DB data folder
 /data/
+node_modules

@@ -30,3 +30,10 @@ services:
       db:
         condition: service_healthy
     restart: always
+  css:
+    build:
+      context: .
+      dockerfile: css.Dockerfile
+    volumes:
+      - .:/code
+
