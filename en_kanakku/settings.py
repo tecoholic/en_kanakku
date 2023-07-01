@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "crispy_bulma",
     # Project apps
     "ledger",
+    "invoicing"
 ]
 
 MIDDLEWARE = [
