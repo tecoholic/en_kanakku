@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum, F
 
 
 class Currencies(models.TextChoices):
@@ -26,8 +27,13 @@ class Invoice(models.Model):
     invoice_number = models.CharField(max_length=20)
     issue_date = models.DateField()
     due_date = models.DateField()
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
     paid = models.BooleanField(default=False)
+
+    @property
+    def amount(self):
+        return InvoiceLineItem.objects.filter(invoice=self).aggregate(
+                amount=Sum(F('quantity') * F('unit_price'))
+        )["amount"] or 0
 
     def __str__(self):
         return self.invoice_number
