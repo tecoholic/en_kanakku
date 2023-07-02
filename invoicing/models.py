@@ -28,6 +28,8 @@ class Invoice(models.Model):
     issue_date = models.DateField()
     due_date = models.DateField()
     paid = models.BooleanField(default=False)
+    extra_header = models.TextField(null=True, blank=True)
+    extra_footer = models.TextField(null=True, blank=True)
 
     class Meta:
         unique_together = [["customer", "invoice_number"]]
