@@ -29,6 +29,9 @@ class Invoice(models.Model):
     due_date = models.DateField()
     paid = models.BooleanField(default=False)
 
+    class Meta:
+        unique_together = [["customer", "invoice_number"]]
+
     @property
     def amount(self):
         return InvoiceLineItem.objects.filter(invoice=self).aggregate(
@@ -36,7 +39,7 @@ class Invoice(models.Model):
         )["amount"] or 0
 
     def __str__(self):
-        return self.invoice_number
+        return f"{self.customer.name} - {self.invoice_number}"
 
 
 class PaymentModes(models.TextChoices):
