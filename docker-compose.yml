@@ -1,7 +1,7 @@
-version: '3'
+version: "3"
 services:
   db:
-    image: postgres
+    image: postgres:16.1
     volumes:
       - ./data/db:/var/lib/postgresql/data
     environment:
@@ -36,4 +36,3 @@ services:
       dockerfile: css.Dockerfile
     volumes:
       - .:/code
-

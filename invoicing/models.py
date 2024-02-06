@@ -9,6 +9,15 @@ class Currencies(models.TextChoices):
     INR = "INR", "INR"
 
 
+class Supplier(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Name of the Business")
+    address = models.TextField()
+    gst_number = models.CharField(max_length=16, verbose_name="GST Number")
+
+    def __str__(self) -> str:
+        return self.name
+
+
 class Customer(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
@@ -30,15 +39,25 @@ class Invoice(models.Model):
     paid = models.BooleanField(default=False)
     extra_header = models.TextField(null=True, blank=True)
     extra_footer = models.TextField(null=True, blank=True)
+    subject = models.CharField(
+        max_length=160,
+        help_text="Single line description added above the list of items",
+        default="",
+        blank=True,
+        null=True,
+    )
 
     class Meta:
         unique_together = [["customer", "invoice_number"]]
 
     @property
     def amount(self):
-        return InvoiceLineItem.objects.filter(invoice=self).aggregate(
-                amount=Sum(F('quantity') * F('unit_price'))
-        )["amount"] or 0
+        return (
+            InvoiceLineItem.objects.filter(invoice=self).aggregate(
+                amount=Sum(F("quantity") * F("unit_price"))
+            )["amount"]
+            or 0
+        )
 
     def __str__(self):
         return f"{self.customer.name} - {self.invoice_number}"
@@ -101,6 +120,7 @@ class InvoiceLineItem(models.Model):
     description = models.CharField(max_length=200)
     quantity = models.PositiveIntegerField(default=1)
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
+    sac_code = models.CharField(max_length=16, default="", blank=True, null=True)
 
     def __str__(self):
         return f"{self.invoice.invoice_number} - {self.description}"
