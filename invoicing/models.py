@@ -32,6 +32,7 @@ class Customer(models.Model):
 
 
 class Invoice(models.Model):
+    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE, null=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     invoice_number = models.CharField(max_length=20)
     issue_date = models.DateField()
