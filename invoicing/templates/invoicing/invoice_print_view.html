@@ -1,0 +1,94 @@
+{% load static %} {% load django_htmx %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Invoice - {{ invoice.invoice_number }}</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/invoice_print_view.css' %}" />
+    <meta name="keywords" content="Invoice" />
+    <meta
+      name="description"
+      content="Invoice {{invoice.invoice_number}} - {{ invoice.customer.name }}"
+    />
+  </head>
+  <body>
+    <div class="container page">
+      <div class="p-6">
+        <section id="header-and-supplier" class="section">
+          <div class="columns">
+            <div class="column">
+              <h1 class="is-size-2 is-uppercase has-text-weight-bold">
+                Tax Invoice
+              </h1>
+              <h2 class="is-size-4 is-capitalized has-text-weight-bold">
+                Invoice #{{ invoice.invoice_number }}
+              </h2>
+            </div>
+            <div class="column has-text-right mt-6">
+              <p><strong>{{invoice.supplier.name}}</strong></p>
+              <p>{{invoice.supplier.address | linebreaks}}</p>
+              <p><strong>GSTIN:</strong> {{invoice.supplier.gst_number}}</p>
+            </div>
+          </div>
+        </section>
+        <section id="customer-and-date" class="section pt-0">
+          <div class="columns">
+            <div class="column">
+              <p>Bill To</p>
+              <p><strong>{{invoice.customer.name}}</strong></p>
+              <p>{{invoice.customer.address | linebreaks}}</p>
+            </div>
+            <div class="column has-text-right mt-5">
+              <p><strong>Invoice Date:</strong> {{invoice.issue_date}}</p>
+              <p><strong>Due Date:</strong> {{invoice.due_date}}</p>
+            </div>
+          </div>
+        </section>
+        <section id="details" class="section pt-0">
+          {% if invoice.subject %}
+          <p class="mb-3"><strong>Sub: </strong>{{ invoice.subject }}</p>
+          {% endif %}
+          <table class="table is-fullwidth">
+            <thead>
+              <tr class="has-background-black">
+                <th class="has-text-white-ter">#</th>
+                <th class="has-text-white-ter">Item &amp; Description</th>
+                <th class="has-text-white-ter">Quantity</th>
+                <th class="has-text-white-ter">Rate</th>
+                <th class="has-text-white-ter">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in invoice.invoicelineitem_set.all %}
+              <tr>
+                <td>{{forloop.counter}}</td>
+                <td>
+                  {{item.description}} {% if item.sac_code %}
+                  <br />
+                  <strong>SAC:</strong> {{item.sac_code}} {% endif %}
+                </td>
+                <td>{{item.unit_price | floatformat}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.amount | floatformat}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="4" class="has-text-right">
+                  <strong> Total </strong>
+                </td>
+                <td>
+                  <strong> {{invoice.customer.currency}} </strong>
+                  <strong> {{invoice.amount | floatformat}} </strong>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

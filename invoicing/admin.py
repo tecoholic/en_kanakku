@@ -7,13 +7,18 @@ from invoicing import models
 class CustomerAdmin(admin.ModelAdmin):
     pass
 
+
 class InvoiceLineItemAdmin(admin.TabularInline):
     model = models.InvoiceLineItem
 
+
 @admin.register(models.Invoice)
 class InvoiceAdmin(admin.ModelAdmin):
-    inlines = [InvoiceLineItemAdmin,]
+    inlines = [
+        InvoiceLineItemAdmin,
+    ]
     list_filter = ["customer__name", "paid"]
+
 
 @admin.register(models.Payment)
 class PaymentAdmin(admin.ModelAdmin):
@@ -22,4 +27,9 @@ class PaymentAdmin(admin.ModelAdmin):
 
 @admin.register(models.RecurringInvoice)
 class RecurringInvoiceAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(models.Supplier)
+class SupplierAdmin(admin.ModelAdmin):
     pass

@@ -1,0 +1,9 @@
+@page {
+  size: a4;
+  margin: 0;
+}
+
+.page {
+  width: 8.5in;
+  height: 11in;
+}

@@ -125,3 +125,7 @@ class InvoiceLineItem(models.Model):
 
     def __str__(self):
         return f"{self.invoice.invoice_number} - {self.description}"
+
+    @property
+    def amount(self):
+        return self.quantity * self.unit_price
