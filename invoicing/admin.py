@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.urls import reverse
 
 from invoicing import models
 
@@ -18,6 +19,10 @@ class InvoiceAdmin(admin.ModelAdmin):
         InvoiceLineItemAdmin,
     ]
     list_filter = ["customer__name", "paid"]
+
+    def view_on_site(self, obj):
+        url = reverse("print_view", kwargs={"invoice_id": obj.id})
+        return url
 
 
 @admin.register(models.Payment)
